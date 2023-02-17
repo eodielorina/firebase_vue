@@ -221,24 +221,80 @@
     //   post_['id_personnel'] = secteur.toList(); 
     //   return post_;
     // }).toList();
-    let pers = db.collection("personne")
-    var promises = []
-    db.collection('secteur').get()
-        .then(snapshot => {
-            snapshot.forEach( doc => {
-       promises.push(doc.data());
-            })
-        console.log(promises)
+    // let pers = db.collection("personne")
+    // var promises = []
+    // db.collection('secteur').get()
+    //     .then(snapshot => {
+    //         snapshot.forEach( doc => {
+    //    promises.push(doc.data());
+    //         })
+    //     console.log(promises)
             
-        });
-    var tab = []
-        pers.get()
-        .then(snap=>{
-          snap.forEach(i=>{
-            tab.push(i.data())
-          })
-          console.log(tab)
-        })
+    //     });
+    // var tab = []
+    //     pers.get()
+    //     .then(snap=>{
+    //       snap.forEach(i=>{
+    //         tab.push(i.data())
+    //       })
+    //       console.log(tab)
+    //     })
+//ty kar mahazo az jiab
+  //  db.collection('personne').doc('uid')
+  //               .collection('secteur').doc('uid');
+  // firestore
+ var test = db.collection('personne')
+  .doc('id')
+  .collection('secteur').orderBy('nom_secteur')
+  .onSnapshot((snapshotChange) => {
+                this.secteur_personnel = [];
+                snapshotChange.forEach((doc) => {
+                    this.secteur_personnel.push({
+                        key: doc.id,
+                        nom_secteur: doc.data().nom_secteur,
+                        name: doc.data().name,
+                        description:doc.data().description,
+                     
+                    })
+                });
+            })
+  console.log(test)
+// FirebaseAuth.getInstance().currentUser?.apply {
+//     db.collection("personne").document(uid).collection("secteur")
+//         .whereEqualTo(id_personnel, true)
+// }
+// router.get('', function(req, res){
+    // var personne = db.collection('personne').ref;
+    // var secteur = db.collection('secteur').ref;
+
+    // personne.once('value', function (snapshot) {
+    //     var promises = [];
+    //     snapshot.forEach(function (childSnapshot) {
+
+    //         var childKey = childSnapshot.key;
+    //         var fk = snapshot.child(childKey).val();
+
+    //         var promise = secteur.child(childSnapshot.val().id_personnel).once('value');
+
+    //         promises.push(promise);
+    //     });
+    //     Promise.all(promises).then(function(snapshots) {
+    //         var dataSet = [];
+    //         snapshots.forEach(function(secteur) {
+
+    //             var childData =  _.assign(secteur.key, secteur.val());
+
+    //             dataSet.push({
+    //                 childKey: secteur.key, 
+    //                 childData: childData
+    //             });
+
+    //         });
+    //         res.json(dataSet);
+    //     });
+
+    // });
+// });
 
     },
     

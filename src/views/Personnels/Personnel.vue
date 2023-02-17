@@ -239,11 +239,10 @@ export default{
 
   getPersonId(id) {
     this.type_submit = "update";
-    console.log(id)
     let dbRef = db.collection('personne').doc(id);
         dbRef.get().then((doc) => {
         this.personne = doc.data();
-       
+       console.log(doc)
       }).catch((error) => {
                 console.log(error)
       })
@@ -284,7 +283,7 @@ export default{
 
   },
     readAll() {
-      db.collection('personne').onSnapshot((snapshotChange) => {
+      var test = db.collection('personne').onSnapshot((snapshotChange) => {
                 this.personnes = [];
                 snapshotChange.forEach((doc) => {
                     this.personnes.push({
@@ -299,6 +298,8 @@ export default{
                     })
                 });
             })
+  console.log(test)
+
     },
     toDataURL(src, callback) {
             var image = new Image();
