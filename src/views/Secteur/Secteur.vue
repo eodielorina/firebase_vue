@@ -243,7 +243,7 @@
   //  db.collection('personne').doc('uid')
   //               .collection('secteur').doc('uid');
   // firestore
- var test = db.collection('personne')
+ var personnel = db.collection('personne')
   .doc('id')
   .collection('secteur').orderBy('nom_secteur')
   .onSnapshot((snapshotChange) => {
@@ -258,7 +258,7 @@
                     })
                 });
             })
-  console.log(test)
+  console.log(personnel)
 // FirebaseAuth.getInstance().currentUser?.apply {
 //     db.collection("personne").document(uid).collection("secteur")
 //         .whereEqualTo(id_personnel, true)
@@ -295,6 +295,25 @@
 
     // });
 // });
+
+// var promises = []
+// db.collection('personne').get()
+//     .then(snapshot => {
+//         snapshot.forEach(doc => {
+           
+//             promises.push(doc.ref.collection('secteur').get());
+//             console.log(doc.id, " => ", doc.data());
+
+//         })
+//         return Promise.all(promises);
+//     })
+//     .then(results => {
+//         results.forEach(querySnapshot => {
+//             querySnapshot.forEach(function (doc) {
+//                 console.log(doc.id, " => ", doc.data());
+//             });
+//         });
+//     });
 
     },
     
