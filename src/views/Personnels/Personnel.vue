@@ -283,9 +283,10 @@ export default{
 
   },
     readAll() {
-      var test = db.collection('personne').onSnapshot((snapshotChange) => {
+       db.collection('personne').onSnapshot((snapshotChange) => {
                 this.personnes = [];
                 snapshotChange.forEach((doc) => {
+                  console.log(snapshotChange)
                     this.personnes.push({
                         key: doc.id,
                         name: doc.data().name,
@@ -298,7 +299,7 @@ export default{
                     })
                 });
             })
-  console.log(test)
+ 
 
     },
     toDataURL(src, callback) {
