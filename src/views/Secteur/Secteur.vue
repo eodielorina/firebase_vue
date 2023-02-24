@@ -90,7 +90,7 @@
     </div>
   
   </template>
-  <script src="./Secteur.js">
+  <script src="./Secteur.js"></script>
   
-  </script>
+  
   
