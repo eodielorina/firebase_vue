@@ -61,8 +61,7 @@ import { fb , db} from "@/firebase";
                  this.secteur.image=''
                 }).catch((error) => {
                     console.log(error);
-                });
-                
+                });     
         this.closeModal();
         this.readAll()      
       }
@@ -132,12 +131,12 @@ import { fb , db} from "@/firebase";
 
   
   },
-    readAll() {
+    readAll(id) {
     
       //  with relation
       // db.collection('personne')
       // .doc('uid')
-      // .collection('secteur').where("personne.id","==",true)
+      // .collection('secteur').where("id_personne","==","personne.id")
       // .orderBy('nom_secteur')
       // .onSnapshot((snap) => {
       //   console.log(snap)
@@ -152,66 +151,29 @@ import { fb , db} from "@/firebase";
       //               //     })
       //               });
       //           })
-      // simple
-      db.collection('secteur').onSnapshot((snapshotChange) => {
-                this.secteur_personnel = [];
-                snapshotChange.forEach((doc) => {
-                  console.log(snapshotChange)
-                    this.secteur_personnel.push({
-                        key: doc.id,
-                        nom_secteur: doc.data().nom_secteur,
-                        id_personne:doc.data().id_personne,
-                        description:doc.data().description,
-                    })
-                });
+
+
+      const personne = db.collection("personne");
+      personne.onSnapshot((personne) => {
+        console.log(personne)
+       db.collection("secteur")
+      //  .where("personne.id","==","id_personne")
+      //  .orderBy("nom_secteur")
+        .onSnapshot((secteur) => {
+        console.log(secteur)
+          secteur.forEach((sec) => {
+            personne.forEach((pers)=>{
+              this.secteur_personnel.push({
+                key: sec.id,
+                nom_secteur: sec.data().nom_secteur,
+                description:sec.data().description,
+                name:pers.data().name
             })
-
-
-    // boucle
-//     let personne = {} ;
-//     let secteur = {};
-//     // db.collection('secteur').where('personnne.id', '==', true)
-//     db.collection('personne').get().then((results) => {
-//         this.secteur_personnel = [];
-//       results.forEach((doc) => {
-//         personne[doc.id] = doc.data();
-//         console.log(doc)
-//         this.secteur_personnel.push({
-//                                 key: doc.id,
-//                                 name: doc.data().name,
-//                             })
-//       });
-      
-//       secteur = db.collection('secteur');
-//       secteur.get().then((docSnaps) => {
-//         docSnaps.forEach((doc) => {
-//         secteur[doc.id] = doc.data();
-//         console.log(doc)
-//         this.secteur_personnel.push({
-//             key: doc.id,
-//             nom_secteur: doc.data().nom_secteur,
-//             description: doc.data().description,
-//         })
-//         // secteur[doc.data()].id_personne = personne[doc.data()].id;
-//       });
-//     }); 
-// })
-  //  db.collection('personne').on('value', function (snapshot) {
-  //       var makeID = snapshot.val().makeID; 
-  //       makesTable.child('secteur').child(makeID).once('value', function(mediaSnap) {
-  //           console.log(makeID + ":" + mediaSnap.val());
-  //       });
-
-        //  var modelsID = snapshot.val(). modelsID; 
-        // modelsTable.child('models').child(modelsID).once('value', function(mediaSnap) {
-        //     console.log(modelsID + ":" + mediaSnap.val());
-        // });
-
-
-    // });
-
+          })
+          })
+        })
+      })
     },
-    
     deleteImage(img,index){
       let image = fb.storage().refFromURL(img);
       this.secteur.image.splice(index,1);

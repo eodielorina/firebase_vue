@@ -77,8 +77,8 @@
           <tbody>
            <tr v-for="sec in secteur_personnel" :key="sec.key">
             <td >{{sec.nom_secteur}}  </td> 
-            <!-- <td >{{sec.name}} &nbsp; </td> -->
-            <td >{{sec.id_personne}} &nbsp; </td>
+            <td >{{sec.name}} &nbsp; </td>
+            <!-- <td >{{sec.id_personne}} &nbsp; </td> -->
             <td >{{sec.description}}</td>
            <td>
             <button @click="getSecteurId(sec.key);" class="btn btn-secondary btn-sm mt-1" ><span class="fas fa-pencil-alt"></span>Editer</button> 
