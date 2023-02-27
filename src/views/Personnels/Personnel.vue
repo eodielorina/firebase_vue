@@ -1,13 +1,31 @@
 <template>
     <div class="container-fluid" >
+      <nav class="navbar shadow bg-white rounded justify-content-between flex-nowrap flex-row fixed-top">
+        <div class="container">
+          <a class="navbar-brand float-left" target="_blank">
+             Firebase.vue
+          </a>
+          <ul class="nav navbar-nav flex-row float-right">
+            <li class="nav-item">
+              <button type="submit" style="float:left"
+                           class="btn btn-dark btn-lg btn-block" @click="logOut()"  >
+                <i class="fas fa-plus "></i> Se deconnecter
+              </button>
+            </li>&nbsp;
+            <li class="nav-item ">
+            <p class="text-right">{{user.displayName}}</p>
+           </li>
+          </ul>
+        </div>
+      </nav>
         <h1>Personnel</h1>
-      
-      <div class="text-right">
-                      <button class="btn btn-primary btn-sm" @click=" addpers" type="button"  >
-                       <i class="fas fa-plus text-end"></i> Nouveau
-                    </button>  
+      <br>
+      <div class="text-right ">
+        <button class="btn btn-primary btn-sm" @click=" addpers" type="button"  >
+          <i class="fas fa-plus text-end mt-5"></i> Nouveau
+        </button>  
       </div> 
-        <div class="form-group">
+      <div class="form-group">
                    <b-modal
                           id="modal_simple"
                           :title="titlemodal"

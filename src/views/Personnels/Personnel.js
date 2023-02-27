@@ -1,5 +1,5 @@
 import {fb,db} from "@/firebase";
-
+import firebase from "firebase";
 export default{
   name:"Personnel",
     data(){
@@ -20,13 +20,22 @@ export default{
       fichier:null,
      timestamp: Date.now(),
      personnes: [],
+     user: null
     }
   },
   mounted(){
     this.readAll();
     
 },
-
+created() {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      this.user = user;
+    } else {
+      this.user = null;
+    }
+  });
+},
   methods:{
     openModal() {
       this.$bvModal.show("modal_simple");
@@ -191,6 +200,13 @@ export default{
         this.imageurl = URL.createObjectURL(xhr.response);
         event.preventDefault();
       };
+      },
+      logOut() {
+        firebase.auth().signOut().then(() => {
+          firebase.auth().onAuthStateChanged(() => {
+            this.$router.push('/login')
+          })
+        })
       },
       
      
