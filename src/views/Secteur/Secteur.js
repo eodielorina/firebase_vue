@@ -1,5 +1,4 @@
 import { fb , db} from "@/firebase";
-  
   export default{
   name:"Secteur",
   components: {
@@ -19,11 +18,19 @@ import { fb , db} from "@/firebase";
      timestamp: Date.now(),
      personnel: [],
      secteur_personnel:[],
-      
+     user: null
   
     }
   },
+ 
   created() {
+    fb.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.user = user;
+      } else {
+        this.user = null;
+      }
+    });
         this.getAllPersonne();
         },
   mounted(){
@@ -174,16 +181,7 @@ import { fb , db} from "@/firebase";
         })
       })
     },
-    deleteImage(img,index){
-      let image = fb.storage().refFromURL(img);
-      this.secteur.image.splice(index,1);
-      image.delete().then(function() {
-        console.log('image deleted');
-      }).catch(function(error) {
-        // Uh-oh, an error occurred!
-        console.log('an error occurred');
-      });
-    },
+   
     remove(id) {
         console.log(id)
         if (window.confirm("Vous voulez Supprimer?")) {
@@ -196,22 +194,12 @@ import { fb , db} from "@/firebase";
               }
       this.readAll();
     }, 
-    uploadImage(e){
-      let file=e.target.files[0];
-       var storageRef = fb.storage().ref('secteur_file/'+file.name);
-        let uploadTask = storageRef.put(file);
-      
-          uploadTask.on('state_changed', (snapshot) => {
-            
-          }, (error) => {
-           
-          }, () => {
-            
-            uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-              this.secteur.image=url;
-              console.log(url)
-            });
-          });
-      }
+    logOut() {
+      fb.auth().signOut().then(() => {
+        fb.auth().onAuthStateChanged(() => {
+          this.$router.push('/login')
+        })
+      })
+    },
   }, 
   }

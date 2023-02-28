@@ -1,28 +1,40 @@
 <template>
     <div class="container-fluid" >
-      <nav class="navbar shadow bg-white rounded justify-content-between flex-nowrap flex-row fixed-top">
-        <div class="container">
-          <a class="navbar-brand float-left" target="_blank">
-             Firebase.vue
-          </a>
-          <ul class="nav navbar-nav flex-row float-right">
-            <li class="nav-item">
-              <button type="submit" style="float:left"
-                           class="btn btn-dark btn-lg btn-block" @click="logOut()"  >
-                <i class="fas fa-plus "></i> Se deconnecter
-              </button>
-            </li>&nbsp;
-            <li class="nav-item ">
-            <p class="text-right">{{user.displayName}}</p>
-           </li>
-          </ul>
-        </div>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">Firebase</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                  <li class="nav-item active">
+                      <router-link to="/personnel" class="nav-link">
+                          <span>Personnel</span>
+                      </router-link>
+                  </li>
+                  <li class="nav-item">
+                      <router-link to="/secteur" class="nav-link">
+                          <span>Secteur</span>
+                      </router-link>
+                  </li> 
+              </ul>
+              <ul class="nav navbar-nav ms-auto">
+                <li class="nav-item ">
+                    <button type="submit"  class="btn btn-dark btn-lg   pull-right" @click="logOut()">
+                      <i class="fa fa-sign-out-alt "></i>
+                    </button> 
+                  </li>&nbsp;&nbsp;
+                <li class="nav-item ">
+                <p class="text-right">{{user.displayName}}</p>
+              </li>
+           </ul>
+          </div>
       </nav>
         <h1>Personnel</h1>
       <br>
-      <div class="text-right ">
+      <div class="text-right ms-auto">
         <button class="btn btn-primary btn-sm" @click=" addpers" type="button"  >
-          <i class="fas fa-plus text-end mt-5"></i> Nouveau
+          <i class="fas fa-plus text-end "></i> Nouveau
         </button>  
       </div> 
       <div class="form-group">
@@ -137,9 +149,9 @@
             </td>
 
            <td>
-            <button @click="getPersonId(pers.key);" class="btn btn-secondary btn-sm mt-1" ><span class="fas fa-pencil-alt"></span>Editer</button> 
+            <button @click="getPersonId(pers.key);" class="btn btn-secondary btn-sm mt-1" ><span class="fas fa-pencil-alt"></span></button> 
             &nbsp;
-            <button @click="remove(pers.key)" class="btn btn-danger btn-sm"><span class="fas fa-trash"></span>Supprimer</button></td>
+            <button @click="remove(pers.key)" class="btn btn-danger btn-sm"><span class="fas fa-trash"></span></button></td>
           </tr>
         </tbody>
     

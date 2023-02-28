@@ -1,5 +1,20 @@
 <template>
     <div class="vue-tempalte">
+      <nav class="navbar shadow bg-white rounded justify-content-between flex-nowrap flex-row fixed-top">
+        <div class="container">
+          <a class="navbar-brand float-left" target="_blank">
+             Firebase.vue
+          </a>
+          <ul class="nav navbar-nav flex-row float-right">
+            <li class="nav-item">
+              <router-link class="nav-link pr-3" to="/login">Login</router-link>
+            </li>&nbsp;
+            <li class="nav-item">
+              <router-link class="btn btn-outline-primary" to="/">S'enregistrer</router-link>
+            </li>
+          </ul>
+        </div>
+      </nav>
         <form @submit.prevent="userLogin">
             <h3>Login</h3>
             <div class="form-group">
@@ -40,7 +55,7 @@ export default {
             this.$router.push('/personnel')
         })
         .catch((error) => {
-          alert(error.message);
+          alert("Mot de passe incorrecte");
         });
     }
   }

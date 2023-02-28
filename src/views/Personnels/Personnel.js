@@ -28,7 +28,7 @@ export default{
     
 },
 created() {
-  firebase.auth().onAuthStateChanged((user) => {
+  fb.auth().onAuthStateChanged((user) => {
     if (user) {
       this.user = user;
     } else {
@@ -202,8 +202,8 @@ created() {
       };
       },
       logOut() {
-        firebase.auth().signOut().then(() => {
-          firebase.auth().onAuthStateChanged(() => {
+        fb.auth().signOut().then(() => {
+          fb.auth().onAuthStateChanged(() => {
             this.$router.push('/login')
           })
         })

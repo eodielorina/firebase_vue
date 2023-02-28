@@ -4,10 +4,11 @@ import router from './routes'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import "font-awesome/css/font-awesome.min.css";
+import '@fortawesome/fontawesome-free/js/all.js';
 Vue.use(BootstrapVue);
+Vue.component('VueFontawesome', require('vue-fontawesome-icon/VueFontawesome.vue').default);
 Vue.config.productionTip = false
-
-
 if (process.env.NODE_ENV == 'development') {
   Vue.BASE_URL = Vue.prototype.BASE_URL = '';
 } else { // Production
