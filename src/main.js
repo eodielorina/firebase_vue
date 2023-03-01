@@ -6,6 +6,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import "font-awesome/css/font-awesome.min.css";
 import '@fortawesome/fontawesome-free/js/all.js';
+import NwImg from 'nw-img-vue';
+import './registerServiceWorker'
+Vue.use(NwImg);
 Vue.use(BootstrapVue);
 Vue.component('VueFontawesome', require('vue-fontawesome-icon/VueFontawesome.vue').default);
 Vue.config.productionTip = false

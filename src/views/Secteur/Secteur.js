@@ -22,7 +22,6 @@ import { fb , db} from "@/firebase";
   
     }
   },
- 
   created() {
     fb.auth().onAuthStateChanged((user) => {
       if (user) {

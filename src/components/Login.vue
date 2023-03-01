@@ -1,5 +1,7 @@
 <template>
-    <div class="vue-tempalte">
+    <div class="vue-tempalte ">
+      <div class="vertical-center">
+          <div class="inner-block">
       <nav class="navbar shadow bg-white rounded justify-content-between flex-nowrap flex-row fixed-top">
         <div class="container">
           <a class="navbar-brand float-left" target="_blank">
@@ -31,12 +33,14 @@
             </p>
         </form>
     </div>
+  </div>
+    </div>
+
 </template>
 
 <script>
 import firebase from "firebase";
 import '@/assets/css/main.css'
-
 export default {
   data() {
     return {

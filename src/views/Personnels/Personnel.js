@@ -16,7 +16,6 @@ export default{
         adresse:"",
         image:"",
       },
-      imageurl:[],
       fichier:null,
      timestamp: Date.now(),
      personnes: [],
@@ -194,12 +193,6 @@ created() {
               console.log(url)
             });
           });
-      },
-      showimage(xhr){
-        xhr.onload = event => {
-        this.imageurl = URL.createObjectURL(xhr.response);
-        event.preventDefault();
-      };
       },
       logOut() {
         fb.auth().signOut().then(() => {

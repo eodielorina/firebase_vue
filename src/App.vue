@@ -1,13 +1,8 @@
 <template>
     <div class="vue-tempalte">
-      <!-- Navigation -->
-      <!-- Main -->
-      <div class="App">
-        <div class="vertical-center">
-          <div class="inner-block">
-            <router-view />
-          </div>
-        </div>
+      <div class="App"> 
+      <router-view />
+       
       </div>
     </div>
   </template>

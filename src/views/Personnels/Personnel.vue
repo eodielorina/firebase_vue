@@ -98,13 +98,12 @@
                         <div class="row">
                 <div class="col-3">
                    <div class="card" style="height: 300px!important;overflow: hidden!important;padding:0.5rem!important;width: 700px!important;">
-                      <img
+                    <img 
                               class="card-img-top img-fluid"
                               alt="Image"
                               :src="personne.image"
-                              id="photos"
-                              style="width: 100%!important;height: auto!important;"
-                      />
+                              style="width: 100%!important;height: auto!important;"/>
+                      
                     </div>
               </div>
            </div>
@@ -138,16 +137,14 @@
             <td >{{pers.email}}</td>
             <td >{{pers.telephone}}</td>
             <td >{{pers.adresse}}</td>
-            
-            <td >
+            <td>
               <div class="form-group d-flex">
                   <div class="img-wrapp">
-                      <img :src="pers.image" alt="" width="150px">
+                    <!-- {{pers.image}} -->
+                      <nw-img :src="pers.image" alt="" width="150px"></nw-img>
                   </div>
                 </div>
-                   
             </td>
-
            <td>
             <button @click="getPersonId(pers.key);" class="btn btn-secondary btn-sm mt-1" ><span class="fas fa-pencil-alt"></span></button> 
             &nbsp;
