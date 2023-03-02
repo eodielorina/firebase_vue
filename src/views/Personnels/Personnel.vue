@@ -20,13 +20,13 @@
               </ul>
               <ul class="nav navbar-nav ms-auto">
                 <li class="nav-item ">
+                <p class="text-right">{{user.displayName}}</p>
+              </li>&nbsp;&nbsp;
+              <li class="nav-item ">
                     <button type="submit"  class="btn btn-dark btn-lg   pull-right" @click="logOut()">
                       <i class="fa fa-sign-out-alt "></i>
                     </button> 
-                  </li>&nbsp;&nbsp;
-                <li class="nav-item ">
-                <p class="text-right">{{user.displayName}}</p>
-              </li>
+                  </li>
            </ul>
           </div>
       </nav>
@@ -65,7 +65,6 @@
                                  <div class="col-md-6">
                                     <div class="form-group">
                                        <label for="">matricule</label>
-
                                        <input type="text" name="matricule"  id="matricule" class="form-control " placeholder="matricule" v-model="personne.matricule" >
                                      </div>
                                  </div>
@@ -141,7 +140,10 @@
               <div class="form-group d-flex">
                   <div class="img-wrapp">
                     <!-- {{pers.image}} -->
-                      <nw-img :src="pers.image" alt="" width="150px"></nw-img>
+                      <!-- <nw-img :src="pers.image" alt="" width="150px"></nw-img> -->
+                      <!-- <img :data-src="pers.image" class="lazyload" width="150px" /> -->
+                      <!-- <img v-lazysizes :data-src="pers.image" width="150px"/> -->
+                      <nw-img :src="pers.image" width="150px"/>
                   </div>
                 </div>
             </td>
@@ -157,3 +159,4 @@
       </div>
     </template> 
     <script src="./Personnel.js"></script>
+    <!-- <script src="./lazysizes.min.js" async></script> -->

@@ -20,13 +20,13 @@
               </ul>
               <ul class="nav navbar-nav ms-auto">
                 <li class="nav-item ">
+                <p class="text-right">{{user.displayName}}</p>
+              </li>&nbsp;&nbsp;
+              <li class="nav-item ">
                     <button type="submit"  class="btn btn-dark btn-lg   pull-right" @click="logOut()">
                       <i class="fa fa-sign-out-alt "></i>
                     </button> 
-                  </li>&nbsp;&nbsp;
-                <li class="nav-item ">
-                <p class="text-right">{{user.displayName}}</p>
-              </li>
+                  </li>
            </ul>
           </div>
       </nav>

@@ -1,11 +1,12 @@
 import {fb,db} from "@/firebase";
 import firebase from "firebase";
+import NwImg from 'nw-img-vue'
+
 export default{
   name:"Personnel",
     data(){
     return {
       titlemodal: "Nouveau personnel",
-      imgData: null,
       personne:{
         id:"",
         name: "",
@@ -43,16 +44,6 @@ created() {
       this.$bvModal.hide("modal_simple");
       this.titlemodal;
   },
-  createBase64Image(FileObject) {
-    console.log(FileObject)
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        this.base64 = event.target.result;
-      }
-      reader.readAsDataURL(FileObject);
-    },
-
-
   addpers()
   {
       this.titlemodal = "Nouveau Personnel";

@@ -7,7 +7,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "font-awesome/css/font-awesome.min.css";
 import '@fortawesome/fontawesome-free/js/all.js';
 import NwImg from 'nw-img-vue';
-import './registerServiceWorker'
+import './registerServiceWorker';
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 Vue.use(NwImg);
 Vue.use(BootstrapVue);
 Vue.component('VueFontawesome', require('vue-fontawesome-icon/VueFontawesome.vue').default);

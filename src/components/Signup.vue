@@ -32,7 +32,7 @@
                 <input type="password" class="form-control form-control-lg" v-model="user.password" />
             </div>
             <button type="submit" class="btn btn-dark btn-lg btn-block">
-               Register
+              S'enregistrer
             </button>
             <p class="forgot-password text-right">
                Vous avez dejà un compte
