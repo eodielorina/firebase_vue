@@ -9,7 +9,7 @@ import { fb , db} from "@/firebase";
       titlemodal: "Nouveau personnel",
       secteur:{
         id:"",
-        id_personne:"",
+        name_personne:"",
         nom_secteur: "",
         description:"",
         image:[]
@@ -49,7 +49,7 @@ import { fb , db} from "@/firebase";
       this.titlemodal = "Nouveau Secteur";
       this.secteur={
         id:"",
-        id_personne:"",
+        name :"",
         description:"" ,
         image:""
       },
@@ -61,7 +61,7 @@ import { fb , db} from "@/firebase";
         if(this.type_submit === 'insert' ){
         this.secteur.id = this.timestamp
         db.collection('secteur').add(this.secteur).then(() => {
-                 this.secteur.id_personne=''
+                 this.secteur.name=''
                  this.secteur.nom_secteur=''
                  this.secteur.description=''
                  this.secteur.image=''
@@ -121,7 +121,7 @@ import { fb , db} from "@/firebase";
         promises.push(
             doc.ref.update({
                  nom_secteur: this.secteur.nom_secteur,
-                 id_personne:this.secteur.id_personne,
+                 name:this.secteur.name,
                  description:this.secteur.description,
              })
         );
@@ -138,49 +138,80 @@ import { fb , db} from "@/firebase";
   
   },
     readAll(id) {
-    
-      //  with relation
-      // db.collection('personne')
-      // .doc('uid')
-      // .collection('secteur').where("id_personne","==","personne.id")
-      // .orderBy('nom_secteur')
-      // .onSnapshot((snap) => {
-      //   console.log(snap)
-      //               this.secteur_personnel = [];
-      //               snap.forEach((doc) => {
-      //               //     this.secteur_personnel.push({
-      //               //         key: doc.id,
-      //               //         nom_secteur: doc.data().nom_secteur,
-      //               //         name: doc.data().name,
-      //               //         description:doc.data().description,
-                        
-      //               //     })
-      //               });
-      //           })
-
-
-      const personne = db.collection("personne");
-      personne.onSnapshot((personne) => {
-        console.log(personne)
-       db.collection("secteur")
-      //  .where("personne.id","==","id_personne")
-      //  .orderBy("nom_secteur")
-        .onSnapshot((secteur) => {
-        console.log(secteur)
-          secteur.forEach((sec) => {
-            personne.forEach((pers)=>{
-              this.secteur_personnel.push({
-                key: sec.id,
-                nom_secteur: sec.data().nom_secteur,
-                description:sec.data().description,
-                name:pers.data().name
-            })
-          })
-          })
-        })
-      })
-    },
    
+      // db.collection("personne").doc("name")
+      // .collection("secteur").where("id_personne","==","personne.id")
+      // .orderBy("nom_secteur")
+      // .onSnapshot((secteur) => {
+      //     console.log(secteur)
+      //       secteur.forEach((sec) => {
+      //         personne.forEach((pers)=>{
+      //           this.secteur_personnel.push({
+      //             key: sec.id,
+      //             nom_secteur: sec.data().nom_secteur,
+      //             description:sec.data().description,
+      //             name:pers.data().name
+      //         })
+      //       })
+      //     })
+      //   })
+      // const personne = db.collection("personne");
+      // personne.onSnapshot((personne) => {
+      //   console.log(personne)
+      //  db.collection("secteur")
+      // //  .where("personne.id","==","id_personne")
+      // //  .orderBy("nom_secteur")
+      //   .onSnapshot((secteur) => {
+      //   console.log(secteur)
+      //     secteur.forEach((sec) => {
+      //       personne.forEach((pers)=>{
+      //         this.secteur_personnel.push({
+      //           key: sec.id,
+      //           nom_secteur: sec.data().nom_secteur,
+      //           description:sec.data().description,
+      //           name:pers.data().name
+      //       })
+      //     })
+      //     })
+      //   })
+      // })
+      
+      // .orderBy("nom_secteur");
+    
+    //   const query = db.collectionGroup('personne')
+    //             .where('secteur.description', '==', 'gestion')
+    //             .orderBy('description');
+    //  console.log(query)
+    // var test =db.collection("secteur")
+    // .where("personne.id","==","id_personne")
+    // .get()
+    // console.log(test)
+    // .then((query) => {
+    //   query.forEach((doc) => {
+    //       console.log(`${doc.id} => ${doc.data().name}`);
+  
+  //  .get().then((querySnapshot) => {
+  //     querySnapshot.forEach((doc) => {
+  //         console.log(`${doc.id} => ${doc.data().id_personne}`);
+  //     });
+  // });
+// });
+// });
+      db.collection('secteur')
+      .onSnapshot((snapshotChange) => {
+         console.log(snapshotChange)
+              this.secteur_personnel = [];
+              snapshotChange.forEach((doc) => {
+                  this.secteur_personnel.push({
+                      key: doc.id,
+                      nom_secteur: doc.data().nom_secteur,
+                      name: doc.data().name,
+                      description:doc.data().description,
+                   
+                  })
+              });
+          })
+    },
     remove(id) {
         console.log(id)
         if (window.confirm("Vous voulez Supprimer?")) {

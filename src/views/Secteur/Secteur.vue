@@ -60,9 +60,9 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="id_personne">Personne</label>
-                                <select name="id_personne" v-model="secteur.id_personne" id="id_personne" class="form-control form-control-sm">
+                                <select name="id_personne" v-model="secteur.name" id="name_personne" class="form-control form-control-sm">
                                     <option value="" disabled selected> choisissez une personne</option>
-                                    <option v-for="(p,index_p) in personnel" :key="index_p" :value="p.id"> {{p.name}}</option>
+                                    <option v-for="(p,index_p) in personnel" :key="index_p" :value="p.name"> {{p.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -72,10 +72,10 @@
                                 <textarea type="text" v-model="secteur.description" name="description" class="form-control form-control-sm" id="qte_achat"></textarea>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                           <label for="image"> Images</label>
                             <input type="file" @change="uploadImage" class="form-control">
-                          </div>
+                          </div> -->
                            <div class="form-group d-flex">
                     </div>
                         <div class="modal-footer">

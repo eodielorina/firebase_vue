@@ -19,3 +19,4 @@ firebase.firestore().enablePersistence()
       } else if (err.code == 'unimplemented') {
       }
   });
+

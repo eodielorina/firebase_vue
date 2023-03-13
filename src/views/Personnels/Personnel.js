@@ -171,6 +171,7 @@ created() {
     }, 
     uploadImage(e){
       let file=e.target.files[0];
+      console.log(file)
        var storageRef = fb.storage().ref('personnel/'+file.name);
         let uploadTask = storageRef.put(file);
           uploadTask.on('state_changed', (snapshot) => {
@@ -192,7 +193,24 @@ created() {
           })
         })
       },
-      
-     
+      uploadToStorage(imageURL){
+      let file=imageURL.target.files[0];
+       this.getFileBlob(blob =>{
+       var img=fb.storage().ref('personnel/'+file.name);
+       img.put(blob).then(function(snapshot) {
+         
+                  
+        })
+       })
+   },
+    getFileBlob  (url, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.responseType = "blob";
+    xhr.addEventListener('load', function() {
+      cb(xhr.response);
+    });
+    xhr.send();
+  },
 } 
 }

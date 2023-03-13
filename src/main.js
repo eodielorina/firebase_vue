@@ -10,8 +10,10 @@ import NwImg from 'nw-img-vue';
 import './registerServiceWorker';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+
 Vue.use(NwImg);
 Vue.use(BootstrapVue);
+
 Vue.component('VueFontawesome', require('vue-fontawesome-icon/VueFontawesome.vue').default);
 Vue.config.productionTip = false
 if (process.env.NODE_ENV == 'development') {

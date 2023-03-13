@@ -22,7 +22,7 @@
                 <li class="nav-item ">
                 <p class="text-right">{{user.displayName}}</p>
               </li>&nbsp;&nbsp;
-              <li class="nav-item ">
+              <li class="nav-item">
                     <button type="submit"  class="btn btn-dark btn-lg   pull-right" @click="logOut()">
                       <i class="fa fa-sign-out-alt "></i>
                     </button> 
@@ -111,7 +111,6 @@
               <b-button type="submit" variant="primary" name="submit" >Enregistrer</b-button>
             </div>
          </form>
-
    </b-modal>
           </div>
       
@@ -143,7 +142,8 @@
                       <!-- <nw-img :src="pers.image" alt="" width="150px"></nw-img> -->
                       <!-- <img :data-src="pers.image" class="lazyload" width="150px" /> -->
                       <!-- <img v-lazysizes :data-src="pers.image" width="150px"/> -->
-                      <nw-img :src="pers.image" width="150px"/>
+                      <nw-img :src="pers.image" width="150px" alt="" class="img-fluid"/>
+                      <!-- <img v-lazy="img.src" > -->
                   </div>
                 </div>
             </td>
