@@ -94,7 +94,7 @@
                             <input type="file" @change="uploadImage" class="form-control" >
                             <input type="hidden" name="image" id=""  v-model="personne.image">
                         </div>
-                        <div class="row">
+              <div class="row">
                 <div class="col-3">
                    <div class="card" style="height: 300px!important;overflow: hidden!important;padding:0.5rem!important;width: 700px!important;">
                     <img 
@@ -153,9 +153,7 @@
             <button @click="remove(pers.key)" class="btn btn-danger btn-sm"><span class="fas fa-trash"></span></button></td>
           </tr>
         </tbody>
-    
-          </table>
-       
+        </table>
       </div>
     </template> 
     <script src="./Personnel.js"></script>

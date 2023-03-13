@@ -60,9 +60,9 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="id_personne">Personne</label>
-                                <select name="id_personne" v-model="secteur.name" id="name_personne" class="form-control form-control-sm">
+                                <select name="id_personne" v-model="secteur.id_personne" id="id_personne" class="form-control form-control-sm">
                                     <option value="" disabled selected> choisissez une personne</option>
-                                    <option v-for="(p,index_p) in personnel" :key="index_p" :value="p.name"> {{p.name}}</option>
+                                    <option v-for="(p,index_p) in personnel" :key="index_p" :value="p.id"> {{p.name}}</option>
                                 </select>
                             </div>
                         </div>

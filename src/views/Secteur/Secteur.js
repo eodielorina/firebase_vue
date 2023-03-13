@@ -9,7 +9,7 @@ import { fb , db} from "@/firebase";
       titlemodal: "Nouveau personnel",
       secteur:{
         id:"",
-        name_personne:"",
+        id_personne:"",
         nom_secteur: "",
         description:"",
         image:[]
@@ -49,7 +49,7 @@ import { fb , db} from "@/firebase";
       this.titlemodal = "Nouveau Secteur";
       this.secteur={
         id:"",
-        name :"",
+        id_personne:"",
         description:"" ,
         image:""
       },
@@ -61,7 +61,7 @@ import { fb , db} from "@/firebase";
         if(this.type_submit === 'insert' ){
         this.secteur.id = this.timestamp
         db.collection('secteur').add(this.secteur).then(() => {
-                 this.secteur.name=''
+                this.secteur.id_personne=''
                  this.secteur.nom_secteur=''
                  this.secteur.description=''
                  this.secteur.image=''
@@ -84,7 +84,7 @@ import { fb , db} from "@/firebase";
     this.type_submit = "update";
     var dbRef = db.collection('secteur').doc(id);
         dbRef.get().then((doc) => {
-        this.secteur = doc.data();
+        console.log(this.secteur = doc.data());
       }).catch((error) => {
                 console.log(error)
       })
@@ -120,9 +120,9 @@ import { fb , db} from "@/firebase";
        snap.forEach(doc => {
         promises.push(
             doc.ref.update({
-                 nom_secteur: this.secteur.nom_secteur,
-                 name:this.secteur.name,
-                 description:this.secteur.description,
+              nom_secteur: this.secteur.nom_secteur,
+              id_personne:this.secteur.id_personne,
+              description:this.secteur.description,
              })
         );
         return Promise.all(promises);
@@ -137,7 +137,7 @@ import { fb , db} from "@/firebase";
 
   
   },
-    readAll(id) {
+    readAll() {
    
       // db.collection("personne").doc("name")
       // .collection("secteur").where("id_personne","==","personne.id")
@@ -160,7 +160,7 @@ import { fb , db} from "@/firebase";
       //   console.log(personne)
       //  db.collection("secteur")
       // //  .where("personne.id","==","id_personne")
-      // //  .orderBy("nom_secteur")
+      // //  .orderBy("id_personne")
       //   .onSnapshot((secteur) => {
       //   console.log(secteur)
       //     secteur.forEach((sec) => {
@@ -175,6 +175,8 @@ import { fb , db} from "@/firebase";
       //     })
       //   })
       // })
+
+      
       
       // .orderBy("nom_secteur");
     
@@ -197,20 +199,40 @@ import { fb , db} from "@/firebase";
   // });
 // });
 // });
-      db.collection('secteur')
-      .onSnapshot((snapshotChange) => {
-         console.log(snapshotChange)
-              this.secteur_personnel = [];
-              snapshotChange.forEach((doc) => {
-                  this.secteur_personnel.push({
-                      key: doc.id,
-                      nom_secteur: doc.data().nom_secteur,
-                      name: doc.data().name,
-                      description:doc.data().description,
+      // db.collection('secteur')
+      // .onSnapshot((snapshotChange) => {
+      //    console.log(snapshotChange)
+      //         this.secteur_personnel = [];
+      //         snapshotChange.forEach((doc) => {
+      //             this.secteur_personnel.push({
+      //                 key: doc.id,
+      //                 nom_secteur: doc.data().nom_secteur,
+      //                 name: doc.data().name,
+      //                 description:doc.data().description,
                    
-                  })
-              });
-          })
+      //             })
+      //         });
+      //     })
+
+      // var db = firebase.firestore();
+    // var promises = []
+    db.collection('personne').get()
+        .then(snapshot => {
+            snapshot.forEach(doc => {
+           db.collection('secteur').onSnapshot((snap) => {
+            this.secteur_personnel = [];
+            snap.forEach((data) => {
+                this.secteur_personnel.push({
+                    key: data.id,
+                    name: doc.data().name,
+                    nom_secteur:data.data().nom_secteur,
+                    description:data.data().description,   
+                })
+            });
+            })
+        })
+        });
+    
     },
     remove(id) {
         console.log(id)
