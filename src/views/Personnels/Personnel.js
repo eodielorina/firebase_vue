@@ -1,7 +1,5 @@
 import {fb,db} from "@/firebase";
 import firebase from "firebase";
-import NwImg from 'nw-img-vue'
-
 export default{
   name:"Personnel",
     data(){
@@ -15,7 +13,7 @@ export default{
         phone: "",
         email: "",
         adresse:"",
-        image:"",
+        image:[],
       },
       fichier:null,
      timestamp: Date.now(),
@@ -55,7 +53,7 @@ created() {
         telephone: "",
         email: "",
         adresse:"",
-        image:"" 
+        image:[] 
       },
       this.type_submit = "insert";
       this.openModal();
@@ -86,7 +84,8 @@ created() {
         event.preventDefault()
         this. updatePerson();
         this.closeModal();
-        this.readAll()
+        this.readAll();
+        // this.reloadPage();
       }
     
     },
@@ -108,32 +107,29 @@ created() {
     },
     updatePerson() {
       const id = this.personne.id;
-       const promises = [];
-       db.collection('personne')
-       .where('id', '==', id )
-       .get()
-       .then(snap => {
-       snap.forEach(doc => {
-        promises.push(
-            doc.ref.update({
-                 email: this.personne.email,
-                 name:this.personne.name,
-                 matricule:this.personne.matricule,
-                 poste:this.personne.poste,
-                 telephone:this.personne.telephone,
-                 adresse:this.personne.adresse,
-                 image:this.personne.image  
-             })
-        );
-        return Promise.all(promises);
+      db.collection("personne").where('id', '==', id ).get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doc.ref.update({
+          email: this.personne.email,
+          name:this.personne.name,
+          name:this.personne.name,
+          matricule:this.personne.matricule,
+          poste:this.personne.poste,
+          telephone:this.personne.telephone,
+          adresse:this.personne.adresse,
+          image:this.personne.image  
+
+        })
+    // window.location.reload();
+
       })
+
     })
     .then(() => {
-      console.log('update avec succes')
-    })
-    .catch(error => {
-      console.error(' error ' + error)
-    })
+      console.log("update avec succes!")
+     }).catch((error) => {
+         console.log(error);
+     });
 
   },
     readAll() {
@@ -155,8 +151,9 @@ created() {
                 });
             })
     },
-   
-    
+    reloadPage() {
+      window.location.reload();
+    },
     remove(id) {
       console.log(id)
       if (window.confirm("Vous voulez Supprimer?")) {
@@ -170,10 +167,11 @@ created() {
       this.readAll();
     }, 
     uploadImage(e){
-      let file=e.target.files[0];
-      console.log(file)
-       var storageRef = fb.storage().ref('personnel/'+file.name);
-        let uploadTask = storageRef.put(file);
+      
+      if(e.target.files[0]){
+        let file=e.target.files[0];
+        var storageRef = fb.storage().ref('personnel/'+file.name);
+         let uploadTask = storageRef.put(file);
           uploadTask.on('state_changed', (snapshot) => {
             
           }, (error) => {
@@ -181,11 +179,12 @@ created() {
           }, () => {
             
             uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-              this.personne.image=url;
+              this.personne.image.push(url);
               console.log(url)
             });
           });
-      },
+      }
+    },
       logOut() {
         fb.auth().signOut().then(() => {
           fb.auth().onAuthStateChanged(() => {
@@ -197,13 +196,11 @@ created() {
       let file=imageURL.target.files[0];
        this.getFileBlob(blob =>{
        var img=fb.storage().ref('personnel/'+file.name);
-       img.put(blob).then(function(snapshot) {
-         
-                  
+       img.put(blob).then(function(snapshot) {       
         })
        })
    },
-    getFileBlob  (url, cb) {
+    getFileBlob(url, cb) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url);
     xhr.responseType = "blob";
@@ -212,5 +209,16 @@ created() {
     });
     xhr.send();
   },
+  deleteImage(img,index){
+    let image = fb.storage().refFromURL(img);
+    this.personne.image.splice(index,1);
+    image.delete().then(function() {
+      console.log('image deleted');
+    }).catch(function(error) {
+      // Uh-oh, an error occurred!
+      console.log('an error occurred');
+    });
+  },
+
 } 
 }

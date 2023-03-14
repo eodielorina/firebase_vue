@@ -92,28 +92,28 @@
                         <div class="form-group">
                           <label for="image"> Images</label>
                             <input type="file" @change="uploadImage" class="form-control" >
-                            <input type="hidden" name="image" id=""  v-model="personne.image">
+                            <input type="hidden" name="image" id=""  v-model="personne.image" >
                         </div>
-              <div class="row">
-                <div class="col-3">
-                   <div class="card" style="height: 300px!important;overflow: hidden!important;padding:0.5rem!important;width: 700px!important;">
-                    <img 
-                              class="card-img-top img-fluid"
-                              alt="Image"
-                              :src="personne.image"
-                              style="width: 100%!important;height: auto!important;"/>
-                      
-                    </div>
-              </div>
-           </div>
+                        <div class="row">
+                            <div class="col-3" v-for="(image, index) in personne.image" >
+                                <div class="card" style="height: 300px!important;overflow: hidden!important;padding:0.5rem!important;width: 70%!important;">
+                                          <img
+                                              class="card-img-top img-fluid"
+                                              alt="Image"
+                                              :src="image"
+                                              style="width: 100%!important;height: auto!important;"
+                                            />
+                                </div>
+                              <button @click="deleteImage(image,index)" type="button" class="btn btn-block btn-danger btn-sm mb-3 mt-1" style="width: 70%!important;"><i class="fa fa-times"></i> Supprimer</button>
+                            </div>
+                        </div>
             <div class="modal-footer">
               <b-button variant="secondary" @click="closeModal()">Fermer</b-button>
-              <b-button type="submit" variant="primary" name="submit" >Enregistrer</b-button>
+              <b-button type="submit" variant="primary" name="submit">Enregistrer</b-button>
             </div>
          </form>
    </b-modal>
           </div>
-      
           <table  class="table table-bordered mt-3">
             <thead>
             <tr>
@@ -135,15 +135,10 @@
             <td >{{pers.email}}</td>
             <td >{{pers.telephone}}</td>
             <td >{{pers.adresse}}</td>
-            <td>
+            <td >
               <div class="form-group d-flex">
                   <div class="img-wrapp">
-                    <!-- {{pers.image}} -->
-                      <!-- <nw-img :src="pers.image" alt="" width="150px"></nw-img> -->
-                      <!-- <img :data-src="pers.image" class="lazyload" width="150px" /> -->
-                      <!-- <img v-lazysizes :data-src="pers.image" width="150px"/> -->
-                      <nw-img :src="pers.image" width="150px" alt="" class="img-fluid"/>
-                      <!-- <img v-lazy="img.src" > -->
+                      <img :src="pers.image" width="150px" alt="" class="img-fluid"/>
                   </div>
                 </div>
             </td>

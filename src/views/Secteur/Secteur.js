@@ -12,7 +12,7 @@ import { fb , db} from "@/firebase";
         id_personne:"",
         nom_secteur: "",
         description:"",
-        image:[]
+        image:''
       },
       id_personne:'',
      timestamp: Date.now(),
@@ -31,7 +31,7 @@ import { fb , db} from "@/firebase";
       }
     });
         this.getAllPersonne();
-        },
+  },
   mounted(){
     this.readAll()
   },
@@ -73,7 +73,7 @@ import { fb , db} from "@/firebase";
       }
       else
       {
-        this. updateSecteur();
+        this.updateSecteur();
         this.closeModal();
         this.readAll()
       }
@@ -138,87 +138,10 @@ import { fb , db} from "@/firebase";
   
   },
     readAll() {
-   
-      // db.collection("personne").doc("name")
-      // .collection("secteur").where("id_personne","==","personne.id")
-      // .orderBy("nom_secteur")
-      // .onSnapshot((secteur) => {
-      //     console.log(secteur)
-      //       secteur.forEach((sec) => {
-      //         personne.forEach((pers)=>{
-      //           this.secteur_personnel.push({
-      //             key: sec.id,
-      //             nom_secteur: sec.data().nom_secteur,
-      //             description:sec.data().description,
-      //             name:pers.data().name
-      //         })
-      //       })
-      //     })
-      //   })
-      // const personne = db.collection("personne");
-      // personne.onSnapshot((personne) => {
-      //   console.log(personne)
-      //  db.collection("secteur")
-      // //  .where("personne.id","==","id_personne")
-      // //  .orderBy("id_personne")
-      //   .onSnapshot((secteur) => {
-      //   console.log(secteur)
-      //     secteur.forEach((sec) => {
-      //       personne.forEach((pers)=>{
-      //         this.secteur_personnel.push({
-      //           key: sec.id,
-      //           nom_secteur: sec.data().nom_secteur,
-      //           description:sec.data().description,
-      //           name:pers.data().name
-      //       })
-      //     })
-      //     })
-      //   })
-      // })
-
-      
-      
-      // .orderBy("nom_secteur");
-    
-    //   const query = db.collectionGroup('personne')
-    //             .where('secteur.description', '==', 'gestion')
-    //             .orderBy('description');
-    //  console.log(query)
-    // var test =db.collection("secteur")
-    // .where("personne.id","==","id_personne")
-    // .get()
-    // console.log(test)
-    // .then((query) => {
-    //   query.forEach((doc) => {
-    //       console.log(`${doc.id} => ${doc.data().name}`);
-  
-  //  .get().then((querySnapshot) => {
-  //     querySnapshot.forEach((doc) => {
-  //         console.log(`${doc.id} => ${doc.data().id_personne}`);
-  //     });
-  // });
-// });
-// });
-      // db.collection('secteur')
-      // .onSnapshot((snapshotChange) => {
-      //    console.log(snapshotChange)
-      //         this.secteur_personnel = [];
-      //         snapshotChange.forEach((doc) => {
-      //             this.secteur_personnel.push({
-      //                 key: doc.id,
-      //                 nom_secteur: doc.data().nom_secteur,
-      //                 name: doc.data().name,
-      //                 description:doc.data().description,
-                   
-      //             })
-      //         });
-      //     })
-
-      // var db = firebase.firestore();
-    // var promises = []
     db.collection('personne').get()
         .then(snapshot => {
             snapshot.forEach(doc => {
+              console.log(doc.data().name)
            db.collection('secteur').onSnapshot((snap) => {
             this.secteur_personnel = [];
             snap.forEach((data) => {
@@ -232,7 +155,6 @@ import { fb , db} from "@/firebase";
             })
         })
         });
-    
     },
     remove(id) {
         console.log(id)
